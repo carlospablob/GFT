@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="card card-signin">
+    <div class="card-body ">
+      <h1>Cliente: <strong>{{dataUser.firstname + ' ' + dataUser.lastname}}</strong></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h1>Cuentas</h1>
+      {{myCards | json}}
+    </div>
+    <div class="col text-center">
+      <h1>Solicitar cuenta</h1>
+      <mat-form-field>
+        <mat-select placeholder="Tipo de tarjeta" (selectionChange)="setCard($event)">
+          <mat-option *ngFor="let card of arrayCards" [value]="card">
+            {{card.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <button class="btn btn-primary" (click)="requestCard()">
+        Solicitar
+      </button>
+    </div>
+  </div>
+
+
+  <div class="row align-items-end margin-custom">
+    <div class="col-12 ">
+      <button class="btn btn-primary float-right" (click)="closeSession()">
+        Cerrar sesion
+      </button>
+    </div>
+  </div>
+</div>
