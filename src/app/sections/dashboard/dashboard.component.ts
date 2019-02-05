@@ -4,7 +4,7 @@ import { UserInfo } from 'src/models/userInfo';
 import { AccountService } from 'src/services/account/account.service';
 import { SnackBarService } from 'src/services/shared/snackbar/snackbar.service';
 import { CardsService } from 'src/services/cards/cards.services';
-import { TypeCard, CardsInterface, RequestCard } from 'src/models/card';
+import { TypeCard, CardsInterface, RequestCard, Card } from 'src/models/card';
 import { MatSelectChange } from '@angular/material';
 import { Router } from '@angular/router';
 
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   public dataUser: UserInfo;
 
-  public myCards = [];
+  public myCards: Array<Card> = [];
 
   public arrayCards: Array<TypeCard> = [];
 
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('token')) {
-      this.dataUser = this._jwtService.getDecodedAccessToken(localStorage.getItem('token'));
+      this.dataUser = this._jwtService.getDecodedAccessToken(localStorage.getItem('token'));      
       this.consultAccounts();
       this.loadCatalogOfCards();
     }
@@ -43,8 +43,9 @@ export class DashboardComponent implements OnInit {
   consultAccounts() {
     this._accountsService.consultAccounts().subscribe(
       response => {
-        console.log(response);
-        this.myCards = response;
+        this.myCards = response.response;
+        console.log(this.myCards.length);
+
       },
       error => {
         console.error(error);

@@ -8,7 +8,19 @@
   <div class="row">
     <div class="col">
       <h1>Cuentas</h1>
-      {{myCards | json}}
+      <ul *ngIf="myCards.length > 0">
+        <li *ngFor="let card of myCards">
+          <p><strong>Nombre: </strong>{{card.name}}</p>
+          <p><strong>Tipo: </strong> {{card.type}}</p>
+          <p> <strong>Depositos: </strong>   {{card.deposits | currency}}</p>
+          <p><strong>Retiros: </strong>{{card.withdrawals | currency}}</p>
+          <p><strong>Balance: </strong>{{card.balance | currency}}</p>
+        </li>
+      </ul>
+
+      <div class="alert alert-warning" role="alert" *ngIf="myCards.length === 0">
+        Aun no tienes cuentas disponibles
+      </div>
     </div>
     <div class="col text-center">
       <h1>Solicitar cuenta</h1>

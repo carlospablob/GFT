@@ -21,3 +21,13 @@ export class RequestCard {
         Object.assign(this, data);
     }
 }
+
+export interface Card {
+    id: string;
+    name: string;
+    type: string;
+    userId: string;
+    deposits: number;
+    withdrawals: number;
+    balance: number;
+}
